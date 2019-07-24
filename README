@@ -1,0 +1,80 @@
+Amplicon Sequence Analysis Tools
+https://github.com/padbr/asat
+
+INTRODUCTION
+------------
+The purpose of this repository is primarily to document custom scripts that I
+use during analysis of amplicon sequencing datasets, when preparing peer
+reviewed manuscripts for publication. My datasets will probably primarily be
+microbial community analyses, using primers targeting hypervariable regions of
+the 16S rRNA gene for prokaryotic community analyses and ITS for fungal
+community analyses, sequenced using Illumina's MiSeq or iSeq platforms.
+
+This repository isn't intended to develop nor present a complete pipeline for
+performing amplicon data analysis. It is just to document the use of custom
+scripts within such pipelines as necessasry for citation in peer-reviewed
+publications. That said, if you find any script presented here useful, you are
+of course free to use it according to the terms of the GNU General Public
+License v3 (see https://github.com/padbr/asat/LICENSE).
+
+
+REQUIREMENTS
+------------
+Operating system: Linux
+    I typically use a 64-bit linux machine. In theory python scripts can work in
+    other operating systems such as Windows or OSX. However, I have taken no
+    precautions to ensure that my code does run on such platforms.
+
+Hardware: very modest hardware should suffice
+    This will depend a lot on the size of the datasets being analyzed and
+    whether or not I have written a given script in such a way as to avoid
+    loading all sequencing reads into memory at once. Typically, I do not go to
+    the trouble of parallelizing my scripts.
+    Probably, a machine with 8 GB of RAM and enough free disk space to handle
+    the sometimes large high-throughput sequencing datasets should suffice.
+
+Software:
+    Python 2.7.x
+    I write primarily in python, using version 2.7.x. I haven't made my code
+    compatible with python3. If I do update to make it compatible, I will do so
+    with backwards compatibility to python2.7 as a high priority. The libraries
+    required for my scripts will vary from script to script, but I regularly use
+    biopython, matplotlib, numpy and scipy. These libraries can easily be
+    installed with pip.
+
+INSTALL
+-------
+No particular installation is required, but it is much more convenient if the
+stand-alone python scripts are placed somewhere referenced by the PATH
+environment variable.
+
+OVERVIEW OF SCRIPTS (usage instructions are detailed within each script)
+-------------------
+strip_degen_primer.py
+    Typically, amplicon sequencing datasets contain the primer sequences at the
+    starts of the R1 and R2 reads. As these sequences are artifactual it is
+    desirable to remove them. That is the purpose of this script. It takes as
+    mandatory arguments, (degenerate) primer sequences and R1 and R2 read files
+    (it only works on paired reads only). It assumes that the reads are
+    directional (i.e. that R1 should have the forward primer and R2 should have
+    the reverse primer). It allows for mismatches to the degenerate primers.
+    If no discernable primer sequence is found in either or both of the R1 and
+    R2 reads, the read pair will be discarded. The output files will contain the
+    paired reads, in separate R1 and R2 files. The matched primer sequences will
+    be stripped from the reads in the output files, while the read names will be
+    kept as they were.
+    I would like to point out that some people advocate keeping at least a part
+    of the primer sequences. The reasoning is that it helps to anchor the ends
+    of an alignment which would be used to make a tree for β-analysis. I would
+    argue that primers are artifactual and should be removed as mismatched
+    amplification is definitely possible. However, especially given that PCR is
+    much more sensitive to mismatches near the 3' end of the primers, I think
+    that it is okay to make the compromise advocated by many and keep the last
+    five nucleotides of the primers (especially if they are not degenerate
+    positions) in order to anchor an alignment. This is not supported in this
+    script, but I just feel like mentioning this point for balance and to allow
+    the reader to best consider if this script is suitable for their needs.
+
+TO DO
+-----
+
