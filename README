@@ -15,7 +15,7 @@ performing amplicon data analysis. It is just to document the use of custom
 scripts within such pipelines as necessasry for citation in peer-reviewed
 publications. That said, if you find any script presented here useful, you are
 of course free to use it according to the terms of the GNU General Public
-License v3 (see https://github.com/padbr/asat/LICENSE).
+License v3 (see LICENCE at https://github.com/padbr/asat).
 
 
 REQUIREMENTS
