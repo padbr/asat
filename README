@@ -34,13 +34,11 @@ Hardware: very modest hardware should suffice
     the sometimes large high-throughput sequencing datasets should suffice.
 
 Software:
-    Python 2.7.x
-    I write primarily in python, using version 2.7.x. I haven't made my code
-    compatible with python3. If I do update to make it compatible, I will do so
-    with backwards compatibility to python2.7 as a high priority. The libraries
+    Python 3.X
+    I write primarily in python, using version 3.X. The libraries
     required for my scripts will vary from script to script, but I regularly use
     biopython, matplotlib, numpy and scipy. These libraries can easily be
-    installed with pip.
+    installed with pip or through various linux distributions' package managers.
 
 INSTALL
 -------
@@ -75,6 +73,31 @@ strip_degen_primer.py
     script, but I just feel like mentioning this point for balance and to allow
     the reader to best consider if this script is suitable for their needs.
 
+benjamini_hochberg_p_adjust.py
+    Two methods: The first is a means of transforming a list of p-values into
+    a corresponding list of false-positive corrected adjusted p-values, using
+    the Benjamini-Hochberg method. The input and output orders are the same.
+    The second method also performs a Benjamini-Hochberg transformation, but
+    it also handles `nan' (not a number) values. Again, input and output order
+    will correspond.
+
+expected_intransience.poisson.py
+    The primary purpose of this is to assess whether features observed in
+    feature tables are present. It is specifically tailored to repeated
+    samples of individuals where one sample is taken before a treamtment
+    and three or four samples are taken after treatment. In "noisy"
+    feature tables, the appearence and disappearence of features over the
+    course of a set of related samples isn't necessarily indicative of the
+    feature being present and absent, especially when the features'
+    abundances are low with respect to the sampling depth. Thus, this
+    script assess the likelihood of observing a feature assuming an approx.
+    relative abundance. It also assess whether the feature is continuously
+    present or absent in the three or four after treatment samples and uses
+    a routine to calculate a gain or a loss score for each feature in each
+    individual. This script is very particular to the data associated with
+    a manuscript in preparation for publication. It has not been written
+    in such a way that it would be easily re-used - especially by somebody
+    not very familiar with writing python scripts.
 TO DO
 -----
 
