@@ -73,6 +73,16 @@ strip_degen_primer.py
     script, but I just feel like mentioning this point for balance and to allow
     the reader to best consider if this script is suitable for their needs.
 
+strip_degen_primer_deep.py
+    This is very similar to strip_degen_primer.py with the exception that it
+    provides an option to search into the reads for a match to a primer. This
+    is to account for the fact that some non-Illumina amplicon reads (e.g.
+    Nanopore) do not have the primers immediately at the start of the read.
+    If running this, note that the depth option should not be more than half
+    of the length of the shortest read in the data. It may be advisable to
+    filter out reads below a certain length before running this in order to
+    avoid an error.
+
 benjamini_hochberg_p_adjust.py
     Two methods: The first is a means of transforming a list of p-values into
     a corresponding list of false-positive corrected adjusted p-values, using
